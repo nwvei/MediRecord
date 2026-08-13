@@ -2,27 +2,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package WaitingRoom;
+package patients;
 
-import clinic.SequentialDynamicList;
+import clinic.KeyDynamicList;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Queue;
-import patients.Patient;
 
 /**
  *
- * @author HP
+ * @author Aaron
  */
-public class WaitingRoomList implements SequentialDynamicList<Patient> {
-    Queue<Patient> waitingList;
+public class PatientsList implements KeyDynamicList<Patient,String>{
+    private  HashMap<String,Patient> patients;
 
     @Override
-    public Patient get() {
+    public Patient get(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public boolean remove() {
+    public boolean remove(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -46,6 +45,4 @@ public class WaitingRoomList implements SequentialDynamicList<Patient> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-   
-    
 }
