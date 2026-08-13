@@ -5,16 +5,16 @@
 package medicalrecords;
 
 import clinic.SequentialDynamicList;
+import java.util.Iterator;
 import java.util.Stack;
 
 /**
  *
  * @author Adriel
  */
-public class MedicalRecordsList implements SequentialDynamicList<MedicalRecord,Integer>{
+public class MedicalRecordsList implements SequentialDynamicList<MedicalRecord>{
     private Stack<MedicalRecord>medicalHistory;
 
-    @Override
     public MedicalRecord get() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -24,17 +24,28 @@ public class MedicalRecordsList implements SequentialDynamicList<MedicalRecord,I
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public boolean add(MedicalRecord item) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public Iterator getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
     public int size() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public boolean isEmpty() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
+   
     
     
     

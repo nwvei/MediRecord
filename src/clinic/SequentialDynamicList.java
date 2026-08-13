@@ -10,7 +10,7 @@ package clinic;
  * @param <T>
  * @param <K>
  */
-public interface SequentialDynamicList<T,K> extends DynamicList<T>{
+public interface SequentialDynamicList<T> extends DynamicList<T>{
     public T get();
     public boolean remove();
     
