@@ -15,34 +15,44 @@ import java.util.Iterator;
 public class PatientsList implements KeyDynamicList<Patient,String>{
     private  HashMap<String,Patient> patients;
 
+    public PatientsList(HashMap<String, Patient> patients) {
+        this.patients = new HashMap();
+    }
+
     @Override
     public Patient get(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(!patients.containsKey(id)){
+            return null;
+        }else{
+        return patients.get(id);
+        }
     }
 
     @Override
     public boolean remove(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return patients.remove(id)!=null;
     }
 
     @Override
     public boolean add(Patient item) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(patients.containsKey(item.getId())) return false;
+        return patients.put(item.getId(), item)==null;
     }
 
     @Override
     public Iterator getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       if(patients.isEmpty()) return null;
+       return patients.values().iterator();
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return patients.size();
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return patients.isEmpty();
     }
 
 }
