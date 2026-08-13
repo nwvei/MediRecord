@@ -6,14 +6,11 @@ package clinic;
 
 /**
  *
- * @author Adriel\
+ * @author UTN
  * @param <T>
  * @param <K>
  */
-public interface SequentialDynamicList<T,K> extends DynamicList<T>{
-    public T get();
-    public boolean remove();
-    
-    
-    
+public interface KeyDynamicList<T,K> extends DynamicList<T,K>{
+    public T get(K id);
+    public boolean remove(K id);
 }

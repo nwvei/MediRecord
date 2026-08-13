@@ -8,9 +8,8 @@ package clinic;
  *
  * @author Adriel
  * @param <T>
- * @param <K>
  */
-public interface DynamicList<T,K> {
+public interface DynamicList<T> {
     public boolean add(T item);
     public int size();
     public boolean isEmpty();
