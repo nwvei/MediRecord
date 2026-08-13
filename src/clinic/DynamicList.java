@@ -4,6 +4,8 @@
  */
 package clinic;
 
+import java.util.Iterator;
+
 /**
  *
  * @author Adriel
@@ -11,6 +13,7 @@ package clinic;
  */
 public interface DynamicList<T> {
     public boolean add(T item);
+    public Iterator getAll();
     public int size();
     public boolean isEmpty();
     
