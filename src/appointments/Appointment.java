@@ -67,7 +67,7 @@ public class Appointment {
     }
 
     public boolean isToday(){
-        return false;
+        return this.date==LocalDate.now();
     }
 
     //public int compareTo(Appointment other); date → time → code
