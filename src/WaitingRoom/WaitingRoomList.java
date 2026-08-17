@@ -17,8 +17,13 @@ import patients.Patient;
 public class WaitingRoomList implements SequentialDynamicList<Patient> {
     Queue<Patient> waitingList;
 
+<<<<<<< HEAD
     public WaitingRoomList(Queue<Patient> waitingList) {
        this.waitingList = waitingList;
+=======
+    public WaitingRoomList() {
+        this.waitingList = new LinkedList();
+>>>>>>> fcd33bc (Cambios)
     }
 
     @Override
