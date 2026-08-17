@@ -24,6 +24,7 @@ public class WaitingRoomList implements SequentialDynamicList<Patient> {
     @Override
     public Patient get() {
         waitingList.peek();
+        return null;
     }
 
     @Override

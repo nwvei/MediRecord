@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="3"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="TxtCedula" alignment="0" max="32767" attributes="0"/>
+                      <Component id="TxtCentroSalud" alignment="1" max="32767" attributes="0"/>
+                      <Component id="TxtFechaNacimiento" alignment="0" pref="395" max="32767" attributes="0"/>
+                      <Component id="TxtSexo" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="TxtMedico" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtNombreP" alignment="0" pref="395" max="32767" attributes="0"/>
+                              <Component id="TxtObservaciones" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="TxtObservaciones1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="TxtTipoConsulta" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="TxtReceta1" min="-2" max="-2" attributes="0"/>
+                              <Component id="TxtReceta" max="32767" attributes="0"/>
+                              <Component id="txtFecha" pref="359" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="TxtReferencias" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtSignos" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtAntecedentes" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtAlergias" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtSintomas" alignment="0" max="32767" attributes="0"/>
+                              <Component id="TxtMotivo" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtNombreP" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtCedula" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtMotivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtFechaNacimiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtSintomas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtAlergias" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtCentroSalud" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtAntecedentes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtTipoConsulta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtSignos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtReferencias" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="TxtObservaciones1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="TxtReceta1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="TxtObservaciones" min="-2" pref="213" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="TxtReceta" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="TxtObservaciones1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Observaciones"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtNombreP">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nombre del Paciente:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtReceta1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Receta de medicamentos"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtObservaciones">
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtReceta">
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtFecha">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha y hora de la consulta:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtTipoConsulta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tipo de consulta:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtCedula">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Numero de Cedula:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtFechaNacimiento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fecha de Nacimiento/Edad:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtSexo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sexo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtCentroSalud">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Centro de Salud:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtMotivo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Motivo de la consulta:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtSintomas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Sintomas Principales:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtAlergias">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Alergias:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtAntecedentes">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Antecedentes familiares:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtSignos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Signos:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtMedico">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Medico a Cargo:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="TxtReferencias">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Referencias:"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
