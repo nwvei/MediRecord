@@ -209,9 +209,11 @@ public class VistaPatients extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/emblem-nowrite.png"))); // NOI18N
         jButton3.setText("Borrar");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/filesave (4).png"))); // NOI18N
         jButton4.setText("Guardar");
+        jButton4.addActionListener(this::jButton4ActionPerformed);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/emblem-system.png"))); // NOI18N
         jButton5.setText("Reditar");
@@ -292,6 +294,18 @@ public class VistaPatients extends javax.swing.JFrame {
     private void txtNombreCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreCActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        txtCedula.setText("");
+        txtNombreC.setText("");
+        txtFechaN.setDate(null);
+        txtTelefono.setText("");
+        txtEmail.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
