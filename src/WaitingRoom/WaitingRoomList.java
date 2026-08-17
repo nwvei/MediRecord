@@ -18,13 +18,12 @@ public class WaitingRoomList implements SequentialDynamicList<Patient> {
     Queue<Patient> waitingList;
 
     public WaitingRoomList(Queue<Patient> waitingList) {
-        this.waitingList = new LinkedList();
+       this.waitingList = waitingList;
     }
 
     @Override
     public Patient get() {
-        waitingList.peek();
-        return null;
+        return waitingList.peek();
     }
 
     @Override
