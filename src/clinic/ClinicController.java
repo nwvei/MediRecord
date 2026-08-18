@@ -42,14 +42,15 @@ public class ClinicController {
         }
     }
 
-    public void findPatient(String id){
+    public Patient findPatient(String id){
          Patient patient=clinic.findPatient(id);
         if(patient==null){
             view.showError("No se encontro un paciente con el id ingresado");
             view.clear();
         }
         view.showData(patient);
-    }
+        return patient;
+    } 
 
     public void removePatient(String id){
         boolean status=clinic.removePatient(id);
