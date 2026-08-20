@@ -9,7 +9,9 @@ import appointments.Appointment;
 import appointments.AppointmentsList;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import patients.Patient;
 import patients.PatientsList;
 
@@ -21,6 +23,13 @@ public class Clinic {
     private PatientsList patients;
     private AppointmentsList appointments;
     private WaitingRoomList waitingroom;
+    
+    
+    public Clinic() {
+        this.patients = new PatientsList(new HashMap<>());
+        this.appointments = new AppointmentsList();
+        this.waitingroom = new WaitingRoomList(new LinkedList<>());
+    }
     
     public boolean addPatient(Patient patient) {
         return patients.add(patient);
