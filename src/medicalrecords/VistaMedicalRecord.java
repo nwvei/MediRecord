@@ -116,12 +116,6 @@ public class VistaMedicalRecord extends javax.swing.JFrame implements Views<Pati
 
         lblConsulta.setText("Razon de la consulta");
 
-        txtNombre.setText("n");
-
-        txtCedula.setText("c");
-
-        txtFecha.setText("f");
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons48/contact (4).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -151,7 +145,7 @@ public class VistaMedicalRecord extends javax.swing.JFrame implements Views<Pati
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCedula)
                     .addComponent(txtFecha))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
