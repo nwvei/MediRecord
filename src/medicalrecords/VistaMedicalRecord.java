@@ -304,23 +304,57 @@ public class VistaMedicalRecord extends javax.swing.JFrame implements Views<Pati
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHistorialActionPerformed
-        if (paciente == null) {
-            showError("Debe buscar un paciente primero");
-            return;
-        }
-        String texto = "";
-        Iterator<MedicalRecord> it = paciente.getMedicalHistory();
-        while (it != null && it.hasNext()) {
-            MedicalRecord r = it.next();
-            texto = texto + r.getDate() + " - " + r.getDiagnosis() + "\n";
-        }
-        JOptionPane.showMessageDialog(this, texto, "Historial", JOptionPane.PLAIN_MESSAGE);
+if (paciente == null) {
+        showError("Debe buscar un paciente primero");
+        return;
+    }
+    if (!paciente.hasMedicalHistory()) {
+        showMessage("Este paciente no tiene registros en su historial");
+        return;
+    }
+
+    java.util.List<MedicalRecord> registros = new java.util.ArrayList<>();
+    Iterator<MedicalRecord> it = paciente.getMedicalHistory();
+    while (it != null && it.hasNext()) {
+        registros.add(it.next());
+    }
+
+    String[] opciones = new String[registros.size()];
+    for (int i = 0; i < registros.size(); i++) {
+        MedicalRecord r = registros.get(i);
+        opciones[i] = (i + 1) + ". " + r.getDate() + " - " + r.getDiagnosis();
+    }
+
+    String seleccion = (String) JOptionPane.showInputDialog(
+            this,
+            "Seleccione el registro que desea ver:",
+            "Historial de " + paciente.getFullName(),
+            JOptionPane.PLAIN_MESSAGE,
+            null,
+            opciones,
+            opciones[opciones.length - 1]);
+
+    if (seleccion == null) {
+        return;
+    }
+
+    int indice = java.util.Arrays.asList(opciones).indexOf(seleccion);
+    MedicalRecord elegido = registros.get(indice);
+
+    String detalle = "Fecha: " + elegido.getDate()
+            + "\nRazon de consulta: " + elegido.getConsultationReason()
+            + "\nDiagnostico: " + elegido.getDiagnosis()
+            + "\nTratamiento: " + elegido.getTreatment()
+            + "\nObservaciones: " + elegido.getNotes();
+
+    JOptionPane.showMessageDialog(this, detalle, "Detalle del registro", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_BtnHistorialActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         String cedula = JOptionPane.showInputDialog(this, "Cedula del paciente:");
         if (cedula != null) {
             paciente = controller.findPatient(cedula);
+            this.showData(paciente);
         }
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
