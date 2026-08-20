@@ -9,6 +9,7 @@ import appointments.Appointment;
 import appointments.AppointmentsList;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,7 +30,12 @@ public class Clinic {
         this.patients = new PatientsList(new HashMap<>());
         this.appointments = new AppointmentsList();
         this.waitingroom = new WaitingRoomList(new LinkedList<>());
+        
+        Patient Pat1 = new Patient("209020513","Aaron Villegas Lopez",LocalDate.of(2008,4,5),
+        "89769974", "aaron@gmail.com");
+        addPatient(Pat1);
     }
+
     
     public boolean addPatient(Patient patient) {
         return patients.add(patient);
