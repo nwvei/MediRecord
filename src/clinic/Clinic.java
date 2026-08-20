@@ -34,6 +34,17 @@ public class Clinic {
         Patient Pat1 = new Patient("209020513","Aaron Villegas Lopez",LocalDate.of(2008,4,5),
         "89769974", "aaron@gmail.com");
         addPatient(Pat1);
+    
+    Appointment cita1 = new Appointment("C001", Pat1,
+        LocalDate.of(2026, 8, 20), LocalTime.of(9, 30), "Control general");
+    scheduleAppointment(cita1);
+
+    
+    medicalrecords.MedicalRecord registro1 = new medicalrecords.MedicalRecord(
+        "Dolor de cabeza", "Migraña", "Ibuprofeno 400mg", "Volver si persiste");
+    Pat1.addMedicalRecord(registro1);
+
+    checkInPatient(Pat1.getId());
     }
 
     
@@ -107,5 +118,7 @@ public class Clinic {
         }
     }
     return false;
+    
 }
+    
 }

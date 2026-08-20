@@ -177,7 +177,7 @@
                       <Component id="txtCedula" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtFecha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="11" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -188,19 +188,10 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="txtNombre">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="n"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txtCedula">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="c"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="txtFecha">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="f"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -349,6 +340,9 @@
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnGuardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscar">
           <Properties>
@@ -360,6 +354,9 @@
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnHistorial">
           <Properties>
@@ -385,6 +382,9 @@
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEliminarUltimoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
