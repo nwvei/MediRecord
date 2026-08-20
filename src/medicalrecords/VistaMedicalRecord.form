@@ -349,6 +349,9 @@
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnGuardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscar">
           <Properties>
@@ -360,6 +363,9 @@
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnHistorial">
           <Properties>
@@ -385,6 +391,9 @@
             <Property name="verticalAlignment" type="int" value="3"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEliminarUltimoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
