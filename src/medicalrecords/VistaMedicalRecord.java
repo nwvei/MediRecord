@@ -4,19 +4,29 @@
  */
 package medicalrecords;
 
+import clinic.ClinicController;
+import clinic.Views;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import patients.Patient;
+
 /**
  *
  * @author Adriel
  */
-public class VistaMedicalRecord extends javax.swing.JFrame {
+public class VistaMedicalRecord extends javax.swing.JFrame implements Views<Patient> {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaMedicalRecord.class.getName());
+    private ClinicController controller;
+    private Patient paciente;
 
     /**
      * Creates new form VistaMedicalRecord
      */
     public VistaMedicalRecord() {
         initComponents();
+        controller = ClinicController.getInstance(this);
+        controller.setView(this);
     }
 
     /**
@@ -106,12 +116,6 @@ public class VistaMedicalRecord extends javax.swing.JFrame {
 
         lblConsulta.setText("Razon de la consulta");
 
-        txtNombre.setText("n");
-
-        txtCedula.setText("c");
-
-        txtFecha.setText("f");
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons48/contact (4).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -141,7 +145,7 @@ public class VistaMedicalRecord extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCedula)
                     .addComponent(txtFecha))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -211,12 +215,14 @@ public class VistaMedicalRecord extends javax.swing.JFrame {
         BtnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BtnGuardar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnGuardar.addActionListener(this::BtnGuardarActionPerformed);
 
         BtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons16/filefind (4).png"))); // NOI18N
         BtnBuscar.setText("Buscar");
         BtnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BtnBuscar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnBuscar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnBuscar.addActionListener(this::BtnBuscarActionPerformed);
 
         BtnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons16/folder (7).png"))); // NOI18N
         BtnHistorial.setText("Historial");
@@ -230,6 +236,7 @@ public class VistaMedicalRecord extends javax.swing.JFrame {
         BtnEliminarUltimo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         BtnEliminarUltimo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         BtnEliminarUltimo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        BtnEliminarUltimo.addActionListener(this::BtnEliminarUltimoActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -297,8 +304,78 @@ public class VistaMedicalRecord extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHistorialActionPerformed
-        // TODO add your handling code here:
+        if (paciente == null) {
+            showError("Debe buscar un paciente primero");
+            return;
+        }
+        String texto = "";
+        Iterator<MedicalRecord> it = paciente.getMedicalHistory();
+        while (it != null && it.hasNext()) {
+            MedicalRecord r = it.next();
+            texto = texto + r.getDate() + " - " + r.getDiagnosis() + "\n";
+        }
+        JOptionPane.showMessageDialog(this, texto, "Historial", JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_BtnHistorialActionPerformed
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        String cedula = JOptionPane.showInputDialog(this, "Cedula del paciente:");
+        if (cedula != null) {
+            paciente = controller.findPatient(cedula);
+        }
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void BtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGuardarActionPerformed
+        if (paciente == null) {
+            showError("Debe buscar un paciente primero");
+            return;
+        }
+        MedicalRecord registro = new MedicalRecord(AreaConsulta.getText(), AreaDiagnostico.getText(), AreaMedicamentos1.getText(), AreaObservaciones.getText());
+        paciente.addMedicalRecord(registro);
+        showMessage("Registro guardado correctamente");
+        showData(paciente);
+    }//GEN-LAST:event_BtnGuardarActionPerformed
+
+    private void BtnEliminarUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarUltimoActionPerformed
+        if (paciente == null) {
+            showError("Debe buscar un paciente primero");
+            return;
+        }
+        paciente.removeLatestMedicalRecord();
+        showMessage("Ultimo registro eliminado");
+        showData(paciente);
+    }//GEN-LAST:event_BtnEliminarUltimoActionPerformed
+
+    @Override
+    public void showData(Patient data) {
+        txtNombre.setText(data.getFullName());
+        txtCedula.setText(data.getId());
+        txtFecha.setText(data.getBirthDate().toString());
+
+        MedicalRecord ultimo = data.getLatestMedicalRecord();
+        if (ultimo != null) {
+            AreaRazonUlt.setText(ultimo.getConsultationReason());
+            AreaDiagnosticoUlt.setText(ultimo.getDiagnosis());
+            AreaRecetaUlt.setText(ultimo.getTreatment());
+            AreaObservacionesUlt.setText(ultimo.getNotes());
+        }
+    }
+
+    @Override
+    public void showError(String error) {
+        JOptionPane.showMessageDialog(this, error);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+
+    @Override
+    public void clear() {
+        txtNombre.setText("");
+        txtCedula.setText("");
+        txtFecha.setText("");
+    }
 
     /**
      * @param args the command line arguments
