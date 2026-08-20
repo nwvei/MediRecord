@@ -3,21 +3,73 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package WaitingRoom;
-
+import appointments.Appointment;
+import clinic.ClinicController;
+import clinic.Views;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author HP
  */
-public class FrmAppoimentsList extends javax.swing.JFrame {
+public class FrmAppoimentsList extends javax.swing.JFrame implements Views<Appointment> {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmAppoimentsList.class.getName());
-
+    private ClinicController controller;
+     private List<Appointment> listaCitas = new ArrayList<>();
     /**
      * Creates new form FrmAppoimentsList
      */
     public FrmAppoimentsList() {
-        initComponents();
+     initComponents();
+        controller = ClinicController.getInstance(this);   
+        controller.setView(this);                         
+        cargarCitas();     
     }
+     @Override
+    public void showData(Appointment data) {
+    }
+
+    @Override
+    public void showError(String error) {
+        JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    @Override
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message, "Aviso",JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public void clear() {
+    }
+private void cargarCitas() {
+    listaCitas.clear();
+    javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+    modelo.addColumn("Codigo");
+    modelo.addColumn("Paciente");
+    modelo.addColumn("Fecha");
+    modelo.addColumn("Hora");
+    modelo.addColumn("Motivo");
+    modelo.addColumn("Estado");
+    Iterator<Appointment> it = controller.getAppointments();
+    while (it != null && it.hasNext()) {
+        Appointment cita = it.next();
+        listaCitas.add(cita);
+        Object[] fila = {
+            cita.getCode(),
+            cita.getPatient().getFullName(),
+            cita.getDate(),
+            cita.getTime(),
+            cita.getReason(),
+            cita.getStatus().getStatus()
+        };
+        modelo.addRow(fila);
+    }
+    tblCitas.setModel(modelo);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,9 +81,10 @@ public class FrmAppoimentsList extends javax.swing.JFrame {
     private void initComponents() {
 
         frmWaitingList = new javax.swing.JInternalFrame();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        ScrollPane = new javax.swing.JScrollPane();
+        tblCitas = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,7 +96,7 @@ public class FrmAppoimentsList extends javax.swing.JFrame {
         frmWaitingList.setToolTipText("");
         frmWaitingList.setVisible(true);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -54,27 +107,35 @@ public class FrmAppoimentsList extends javax.swing.JFrame {
                 "Cedula", "Nombre", "Fecha ", "hora"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        ScrollPane.setViewportView(tblCitas);
 
         jButton2.setText("Presente");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+
+        jButton1.setText("Lista de Espera");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
 
         javax.swing.GroupLayout frmWaitingListLayout = new javax.swing.GroupLayout(frmWaitingList.getContentPane());
         frmWaitingList.getContentPane().setLayout(frmWaitingListLayout);
         frmWaitingListLayout.setHorizontalGroup(
             frmWaitingListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frmWaitingListLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addGroup(frmWaitingListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addContainerGap(119, Short.MAX_VALUE))
         );
         frmWaitingListLayout.setVerticalGroup(
             frmWaitingListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(frmWaitingListLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, frmWaitingListLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -98,6 +159,21 @@ public class FrmAppoimentsList extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+     int fila = tblCitas.getSelectedRow();
+    if (fila == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una cita de la lista");
+        return;
+    }
+
+    Appointment citaSeleccionada = listaCitas.get(fila);
+    controller.checkInPatient(citaSeleccionada.getPatient().getId());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,9 +201,10 @@ public class FrmAppoimentsList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JInternalFrame frmWaitingList;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tblCitas;
     // End of variables declaration//GEN-END:variables
 }

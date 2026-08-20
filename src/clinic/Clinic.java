@@ -91,9 +91,10 @@ public class Clinic {
     }
 
     public boolean checkInPatient(String patientId) {
-         if(patients.get(patientId)!=null) return true;
-         return false;
-    }
+    Patient patient = patients.get(patientId);
+    if (patient == null) return false;
+    return waitingroom.add(patient);
+}
 
     public Patient getNextPatient() {
         return waitingroom.get();
