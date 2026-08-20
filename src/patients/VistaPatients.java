@@ -4,21 +4,78 @@
  */
 package patients;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 /**
  *
  * @author Aaron
  */
-public class VistaPatients extends javax.swing.JFrame {
+public class VistaPatients extends javax.swing.JFrame implements clinic.Views<patients.Patient> {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaPatients.class.getName());
+    private clinic.ClinicController controller;
+    private Patient ultimoPacienteBorrado;
+    private Patient pacienteActual;
 
     /**
      * Creates new form VistaPatients
      */
     public VistaPatients() {
         initComponents();
+        controller = clinic.ClinicController.getInstance(this);
+        controller.setView(this);
     }
+    
+@Override
+    public void clear() {
+    txtCedula.setText("");
+    txtNombreC.setText("");
+    txtFechaN.setDate(null);
+    txtTelefono.setText("");
+    txtEmail.setText("");
+}
 
+@Override
+public void showData(Patient patient) {
+    if (patient == null) {
+        return;
+    }
+    txtCedula.setText(patient.getId());
+    txtNombreC.setText(patient.getFullName());
+    if (patient.getBirthDate() != null) {
+        Date fecha = Date.from(patient.getBirthDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        txtFechaN.setDate(fecha);
+    } else {
+        txtFechaN.setDate(null);
+    }
+    txtTelefono.setText(patient.getPhone());
+    txtEmail.setText(patient.getEmail());
+}
+
+@Override
+public void showError(String error) {
+    javax.swing.JOptionPane.showMessageDialog(this, error, "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+}
+
+@Override
+public void showMessage(String message) {
+    javax.swing.JOptionPane.showMessageDialog(this, message, "Aviso", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+}
+private Patient armarPaciente() {
+    if (txtFechaN.getDate() == null) {
+        showError("Debe seleccionar la fecha de nacimiento");
+        return null;
+    }
+    String id = txtCedula.getText();
+    String nombre = txtNombreC.getText();
+    String telefono = txtTelefono.getText();
+    String email = txtEmail.getText();
+    LocalDate fechaNacimiento = txtFechaN.getDate().toInstant()
+        .atZone(ZoneId.systemDefault()).toLocalDate();
+    return new Patient(id, nombre, fechaNacimiento, telefono, email);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,7 +214,7 @@ public class VistaPatients extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(26, 26, 26)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                     .addGap(611, 611, 611)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,6 +263,7 @@ public class VistaPatients extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(130, 150, 170), 2));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/filefind (4).png"))); // NOI18N
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/emblem-nowrite.png"))); // NOI18N
         jButton3.setText("Borrar");
@@ -217,13 +275,16 @@ public class VistaPatients extends javax.swing.JFrame {
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/emblem-system.png"))); // NOI18N
         jButton5.setText("Reditar");
+        jButton5.addActionListener(this::jButton5ActionPerformed);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/games_48.png"))); // NOI18N
         jButton6.setText("Atras");
+        jButton6.addActionListener(this::jButton6ActionPerformed);
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons32/folder (7).png"))); // NOI18N
         jButton7.setText("Registros");
         jButton7.setToolTipText("");
+        jButton7.addActionListener(this::jButton7ActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -296,16 +357,75 @@ public class VistaPatients extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreCActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        txtCedula.setText("");
-        txtNombreC.setText("");
-        txtFechaN.setDate(null);
-        txtTelefono.setText("");
-        txtEmail.setText("");
+       String id = txtCedula.getText();
+    String nombre = txtNombreC.getText();
+    String telefono = txtTelefono.getText();
+    String email = txtEmail.getText();
+
+    java.time.LocalDate fechaNacimiento = null;
+    if (txtFechaN.getDate() != null) {
+        fechaNacimiento = txtFechaN.getDate().toInstant()
+            .atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+    }
+
+    ultimoPacienteBorrado = new Patient(id, nombre, fechaNacimiento, telefono, email);
+    controller.removePatientSilently(id);
+    clear();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+      Patient nuevo = armarPaciente();
+    if (nuevo == null) {
+        return;
+    }
+    controller.addPatient(nuevo);
+    clear();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         String id = txtCedula.getText();
+    if (id.isEmpty()) {
+        showError("Debe ingresar una cedula para buscar");
+        return;
+    }
+    pacienteActual = controller.findPatient(id);
+    showData(pacienteActual);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Patient actualizado = armarPaciente();
+    if (actualizado == null) {
+        return;
+    }
+    controller.removePatient(actualizado.getId());
+    controller.addPatient(actualizado);
+    clear();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        if (ultimoPacienteBorrado == null) {
+        showError("No hay ningun paciente para recuperar");
+        return;
+    }
+    showData(ultimoPacienteBorrado);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+ if (pacienteActual == null) {
+        showError("Debe buscar un paciente primero");
+        return;
+    }
+
+    if (!pacienteActual.hasMedicalHistory()) {
+        showError("Este paciente no tiene registros en su historial");
+        return;
+    }
+
+    DialogHistorial dialogo = new DialogHistorial(this, true);
+    dialogo.cargarHistorial(pacienteActual);
+    dialogo.cargarHistorial(pacienteActual);
+    dialogo.setVisible(true);       
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
