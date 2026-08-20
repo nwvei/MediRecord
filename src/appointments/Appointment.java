@@ -59,11 +59,11 @@ public class Appointment implements Comparable<Appointment>{
     }
 
     public void cancel(){
-        
+        this.status = AppointmentStatus.CANCELLED;
     }
 
     public boolean isPending(){
-        return false;
+        return status == AppointmentStatus.SCHEDULED || status == AppointmentStatus.CHECKED_IN;
     }
 
     public boolean isToday(){
