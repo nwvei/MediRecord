@@ -48,7 +48,6 @@ public class ClinicController {
             view.showError("No se encontro un paciente con el id ingresado");
             view.clear();
         }
-        view.showData(patient);
         return patient;
     } 
 
