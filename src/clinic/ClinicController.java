@@ -59,6 +59,9 @@ public class ClinicController {
             view.showError("Ocurrio un error no se logro eliminar el paciente");
         }
     }
+    public boolean removePatientSilently(String id){
+        return clinic.removePatient(id);
+    }
 
     public Iterator<Patient> getPatients(){
         return clinic.getPatients();
